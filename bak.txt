@@ -1,7 +1,0 @@
-allProducts 
-adminProduct
-detailProduct
-createProduct
-deleteProduct
-updateProduct
-createReview
