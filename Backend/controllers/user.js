@@ -1,4 +1,4 @@
 import User from "../models/user.js";
 
 
-module.exports = {}
+export default  {}
