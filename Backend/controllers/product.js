@@ -1,12 +1,17 @@
 import Product from "../models/product.js"
 
-
 const allProducts = async (req, res) => {
     try {
         const products = await Product.find({})
-        res.status(200).json({
-            products
-        })
+        if (products.length === 0) {
+            return res.status(404).json({
+                error: "Urunler Bulunamadı",
+            });
+        } else {
+            res.status(200).json({
+                products
+            })
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -47,6 +52,13 @@ const detailProduct = async (req, res) => {
 
 
 const createProduct = async (req, res) => {
+    let images = [];
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images);
+    } else {
+        images = req.body.images
+    }
+    // requestin images verisi string ise images dizisine bu istegi ekler aksi halde bu istegi bir degiskene atar
     try {
         const product = await Product.create(req.body)
         res.status(201).json({
@@ -80,13 +92,17 @@ const deleteProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
-
+        let images = [];
+        if (typeof req.body.images === "string") {
+            images.push(req.body.images);
+        } else {
+            images = req.body.images
+        }
         if (!updatedProduct) {
             return res.status(404).json({
                 error: "Ürün bulunamadı",
             });
         }
-
         res.status(200).json({
             product: updatedProduct
         })
@@ -96,7 +112,6 @@ const updateProduct = async (req, res) => {
         res.status(500).json({
             error: "Urun Guncellenemedi",
         });
-
     }
 }
 
