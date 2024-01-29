@@ -3,7 +3,7 @@ import Product from "../models/product.js"
 
 const allProducts = async (req, res) => {
     try {
-        const products = await Product.find({}, "name desc price stock category rating")
+        const products = await Product.find({})
         res.status(200).json({
             products
         })
@@ -42,7 +42,6 @@ const detailProduct = async (req, res) => {
         res.status(500).json({
             error: "Urun Gelmedi",
         });
-
     }
 }
 
@@ -74,7 +73,6 @@ const deleteProduct = async (req, res) => {
         res.status(500).json({
             error: "Urun silinemedi",
         });
-
     }
 }
 

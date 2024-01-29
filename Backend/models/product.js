@@ -25,7 +25,45 @@ const productSchema = new mongoose.Schema({
     rating: {
         type: Number,
         default: 0,
-    }
-})
+    },
+    images: [
+        {
+            public_id: {
+                type: String,
+                required: true
+            },
+            url: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true
+    },
+    reviews: [
+        {
+            user: {
+                type: mongoose.Schema.ObjectId,
+                ref: "User",
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            comment: {
+                type: String,
+                required: true
+            },
+            rating: {
+                type: Number,
+                required: true
+            },
+        }
+    ]
+}, { timestamps: true });
 
 export default mongoose.model('Product', productSchema);
