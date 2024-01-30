@@ -25,14 +25,12 @@ const register = async (req, res) => {
         const newUser = await User.create({
             name, email, password: passwordHash
         })
-
         const token = await jwt.sign({ id: newUser._id }, "SECRETTOKEN", { expiresIn: "1h" });
         const cookieOptions = {
             httpOnly: true,
             expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
         }
-
-        res.status(201).cookie("token", token,cookieOptions).json({
+        res.status(201).cookie("token", token, cookieOptions).json({
             newUser,
             token
         })
@@ -46,9 +44,28 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email, password });
-        res.status(200).json({
-            user
+        const user = await User.findOne({ email });
+        if (!user) {
+            res.status(404).json({
+                message: "Giris Yapılamadı"
+            })
+        }
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        // disaridan gelen sifre ile kayitli olanı kıyaslıyorum(bcrypt.compare karşılaştırır.)
+        if (!passwordMatch) {
+            return res.status(404).json({
+                message: "Giris Yapılamadı"
+            })
+        }
+        const token = await jwt.sign({ id: user._id }, "SECRETTOKEN", { expiresIn: "1h" });
+        const cookieOptions = {
+            httpOnly: true,
+            expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+        }
+        res.status(200).cookie("token", token, cookieOptions).json({
+            // sırasıyla token adında bir cerez oluşturdum bunun verileri token degişkeninden gelir ve özellikleri ise cookieOptionstan gelir
+            user,
+            token
         })
     } catch (error) {
         console.error(error);
@@ -61,7 +78,12 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
     try {
-        res.status(200).json({
+        const cookieOptions = {
+            httpOnly: true,
+            expires: new Date(Date.now())
+        }
+        // kullanıcı çıkış yaptıgından çerezi temizledim
+        res.status(200).cookie("token", null, cookieOptions).json({
             message: "Cıkış işlemi Başarılı"
         })
     } catch (error) {
@@ -93,28 +115,27 @@ const forgotPassword = async (req, res) => {
     }
 }
 
-
 const resetPassword = async (req, res) => {
-    try {
-        // ! jwt kullanacgım
-        const user = await User.findOne({ email: req.body.email })
-
-        if (!user) {
-            return res.status(500).json({ message: "Gecersiz Token" });
-        }
-        res.status(200).json({
-            message: "Mailinizi Kontrol ediniz"
-        })
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: "Gecersiz Token",
-        });
+    const resetPassToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
+    const user = await User.findOne({
+        resetPassToken,
+        resetPasswordExpire: { $gt: Date.now() }
+    })
+    if (!user) {
+        return res.status(404).json({ message: "Gecersiz Token" });
     }
+    const token = await jwt.sign({ id: user._id }, "SECRETTOKEN", { expiresIn: "1h" });
+    const cookieOptions = {
+        httpOnly: true,
+        expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+    }
+    res.status(200).cookie("token", token, cookieOptions).json({
+        user,
+        token
+    })
 }
 
-const userDetail = async (req, res) => {
+const userDetail = async (req, res,next) => {
     try {
         const user = await User.findById(req.params.id);
         res.status(200).json({
@@ -128,5 +149,9 @@ const userDetail = async (req, res) => {
     }
 }
 
-
 export { register, login, logout, forgotPassword, resetPassword, userDetail };
+/*
+! crypto.createHash("sha256"): SHA-256 algoritmasını kullanıp kriptografik hash nesnesi oluşturur. 
+!digest("hex"): Oluşturulan hash nesnesini, hex formatında bir string olarak döndürür. 
+!Bu, token'ın daha okunabilir bir formda olmasını sağlar.
+*/
