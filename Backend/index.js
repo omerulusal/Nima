@@ -5,7 +5,7 @@ import db from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
-
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 // ortam değişkenlerine erişmek için kullanılan modüldür.
@@ -14,11 +14,13 @@ const app = express();
 
 app.use(cors());
 
-app.use(bodyParser.json({limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-
+app.use(cookieParser());
+// çerezleri okumak ve yönetmek için kullanılan bir middlewaredir.
 app.use(express.json());
+
 app.use("/", product)
 app.use("/", user)
 

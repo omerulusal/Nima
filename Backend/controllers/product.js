@@ -21,9 +21,9 @@ const allProducts = async (req, res) => {
 }
 
 
-const adminProduct = async (req, res) => {
+const adminProduct = async (req, res, next) => {
     try {
-        const products = await Product.find({}, "name desc price stock category rating")
+        const products = await Product.find()
         res.status(200).json({
             products
         })
@@ -32,7 +32,6 @@ const adminProduct = async (req, res) => {
         res.status(500).json({
             error: "Urunler Gelmedi",
         });
-
     }
 }
 
@@ -51,7 +50,8 @@ const detailProduct = async (req, res) => {
 }
 
 
-const createProduct = async (req, res) => {
+// ADMIN 
+const createProduct = async (req, res, next) => {
     let images = [];
     if (typeof req.body.images === "string") {
         images.push(req.body.images);
@@ -64,7 +64,6 @@ const createProduct = async (req, res) => {
         res.status(201).json({
             product
         })
-
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -74,7 +73,7 @@ const createProduct = async (req, res) => {
 }
 
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
     try {
         const deletedProduct = await Product.findByIdAndDelete(req.params.id)
         res.status(200).json({
@@ -89,7 +88,7 @@ const deleteProduct = async (req, res) => {
 }
 
 
-const updateProduct = async (req, res) => {
+const updateProduct = async (req, res, next) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         let images = [];
@@ -115,4 +114,30 @@ const updateProduct = async (req, res) => {
     }
 }
 
-export { createProduct, allProducts, adminProduct, detailProduct, deleteProduct, updateProduct }
+const createReview = async (req, res, next) => {
+    try {
+        const { comment, rating } = req.body;
+        const review = {
+            user: req.user._id,
+            name: req.user.name,
+            comment,
+            rating: Number(rating)
+        };
+        let product = await Product.findById(req.body.productId);
+        product.rating = (product.rating * product.reviews.length + review.rating) / (product.reviews.length + 1);
+        product.reviews.push(review);
+        await product.save();
+        res.status(200).json({
+            product
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: "Yorum Oluşturulamadı",
+        });
+    }
+}
+
+
+
+export { createProduct, allProducts, adminProduct, detailProduct, deleteProduct, updateProduct, createReview }
