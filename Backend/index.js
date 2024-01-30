@@ -6,9 +6,17 @@ import dotenv from "dotenv";
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { v2 as cloudinary } from 'cloudinary';
 
 dotenv.config();
 // ortam değişkenlerine erişmek için kullanılan modüldür.
+
+cloudinary.config({
+    cloud_name: 'de9upaogi',
+    api_key: '848447585291296',
+    api_secret: 'TJHC80ECAGm31Rp-KbAS6yZx9aA',
+});
+console.log(cloudinary.config().cloud_name);
 
 const app = express();
 

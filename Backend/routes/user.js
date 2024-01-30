@@ -7,7 +7,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/logout", logout);
 router.post("/forgot", forgotPassword);
-router.post("/reset", resetPassword);
+router.post("/reset/:token", resetPassword);
 router.get("/me/:id", authMidware, userDetail);
 //authMidware: Giris yapmadan kullanıcı hesabının detaylarını göremez.
 export default router;

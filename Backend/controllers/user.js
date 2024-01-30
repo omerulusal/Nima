@@ -25,7 +25,7 @@ const register = async (req, res, next) => {
         const newUser = await User.create({
             name, email, password: passwordHash
         })
-        const token = await jwt.sign({ id: newUser._id }, "SECRETTOKEN", { expiresIn: "1h" });
+        const token = jwt.sign({ id: newUser._id }, "SECRETTOKEN", { expiresIn: "1h" });
         const cookieOptions = {
             httpOnly: true,
             expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
@@ -116,23 +116,33 @@ const forgotPassword = async (req, res) => {
 }
 
 const resetPassword = async (req, res) => {
-    const resetPassToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
-    const user = await User.findOne({
-        resetPassToken,
-        resetPasswordExpire: { $gt: Date.now() }
-    })
-    if (!user) {
-        return res.status(404).json({ message: "Gecersiz Token" });
+    try {
+        // Şifre Sıfırlamada Tokende hata oluşuyor sonra çöz
+        const resetPassToken = crypto.createHash('sha256').update(req.params.token).digest("hex");
+        const user = await User.findOne({
+            resetPassToken: resetPassToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        })
+        if (!user) {
+            return res.status(404).json({ message: "Gecersiz Token" });
+        }
+
+        await user.save();
+        const token = jwt.sign({ id: user._id }, "SECRETTOKEN", { expiresIn: "1h" });
+        const cookieOptions = {
+            httpOnly: true,
+            expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+        }
+        res.status(200).cookie("token", token, cookieOptions).json({
+            user,
+            token
+        })
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            error: "Hata Oluştu",
+        });
     }
-    const token = await jwt.sign({ id: user._id }, "SECRETTOKEN", { expiresIn: "1h" });
-    const cookieOptions = {
-        httpOnly: true,
-        expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
-    }
-    res.status(200).cookie("token", token, cookieOptions).json({
-        user,
-        token
-    })
 }
 
 const userDetail = async (req, res, next) => {
