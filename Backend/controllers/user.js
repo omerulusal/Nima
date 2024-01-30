@@ -4,7 +4,7 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import bcrypt from "bcryptjs";
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     const user = await User.findOne({ email })
@@ -135,7 +135,7 @@ const resetPassword = async (req, res) => {
     })
 }
 
-const userDetail = async (req, res,next) => {
+const userDetail = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
         res.status(200).json({
