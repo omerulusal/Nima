@@ -25,7 +25,7 @@ const roleChecked = (...roles) => {
         if (!roles.includes(req.user.role)) {
             return res.status(500).json({ message: "Giris icin izniniz bulunmamaktadir" });
         }
-        next()
+        next();
     }
 }
 

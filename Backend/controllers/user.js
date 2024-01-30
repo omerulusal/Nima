@@ -2,13 +2,39 @@ import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-
+import bcrypt from "bcryptjs";
 
 const register = async (req, res) => {
+    const { name, email, password } = req.body;
+
+    const user = await User.findOne({ email })
+    //User modelimde gelen emaile sahip bir kullanıcının olup olmadıgını kontrol ediyorum
+    if (user) {
+        return res.status(404).json({
+            message: 'Boyle bir kullanici zaten var!'
+        })
+    }
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    if (password.length < 6) {
+        return res.status(404).json({
+            message: "Sifre en az 6 karakter olmalıdır"
+        })
+    }
     try {
-        const user = await User.create(req.body)
-        res.status(200).json({
-            user
+        const newUser = await User.create({
+            name, email, password: passwordHash
+        })
+
+        const token = await jwt.sign({ id: newUser._id }, "SECRETTOKEN", { expiresIn: "1h" });
+        const cookieOptions = {
+            httpOnly: true,
+            expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
+        }
+
+        res.status(201).cookie("token", token,cookieOptions).json({
+            newUser,
+            token
         })
     } catch (error) {
         console.error(error);
