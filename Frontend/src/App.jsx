@@ -8,6 +8,8 @@ import Cart from "./pages/Cart"
 import ResetPassword from "./pages/ResetPassword"
 import Products from "./pages/Products"
 import Detail from "./pages/Detail"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
