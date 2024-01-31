@@ -1,9 +1,11 @@
 .group {
     display: flex;
     line-height: 28px;
+    justify-content: center;
     align-items: center;
     position: relative;
-    max-width: 190px;
+    min-width: 720px;
+    margin: 0 auto;
 }
 
 .input {
