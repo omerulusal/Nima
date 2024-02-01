@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../components/Search/Search';
@@ -7,7 +8,6 @@ import { SlBasket, SlLocationPin } from "react-icons/sl";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    // eslint-disable-next-line no-unused-vars
     const [user, setUser] = useState(false)
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const Header = () => {
                         )}
                     </div>
                 </div>
-                <div className="basket relative">
+                <div className="basket relative cursor-pointer" onClick={() => navigate("/cart")} >
                     <SlBasket size={24} />
                     <span className='text-xs text-red-500 ml-1 font-bold rounded-full px-1 w-5 flex items-center justify-center py-0.5 bg-red-100 absolute -top-3 -right-3'>1</span>
                 </div>
