@@ -3,6 +3,8 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 import { useNavigate } from 'react-router-dom';
 import TopluCard from "../components/TopluCard";
+import BestSelling from "../components/BestSelling";
+import Cta from "../components/CTA";
 
 const Home = () => {
 
@@ -20,7 +22,7 @@ const Home = () => {
         "/sale3.jpeg",
     ]
     return (
-        <div className="overflow-x-clip mt-5 drop-shadow-2xl my-96">
+        <div className="overflow-x-clip mt-5 drop-shadow-md mb-28">
             <Slider {...ayarlar}>
                 {slideData.map((item, id) => (
                     <div key={id}>
@@ -36,9 +38,11 @@ const Home = () => {
             <TopluCard ikili />
 
             <div className="flex flex-row justify-between mt-52">
-                <Title text={"Size Ozel Urunler"} />
-                <Button right text={"Detaylar"} onClick={() => navigate("/products")} />
+                <Title text={"En Çok Satılanlar"} />
+                <Button right text={"Detaylar"} onClick={() => navigate("/product/:id")} />
             </div>
+            <BestSelling />
+            <Cta />
         </div>
     )
 }

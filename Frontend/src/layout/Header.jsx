@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../components/Search/Search';
 import { useNavigate } from 'react-router-dom';
+import { SlBasket } from "react-icons/sl";
 
 
 const Header = () => {
@@ -18,13 +19,13 @@ const Header = () => {
                 </div>
                 <Search />
                 <div className="space-x-2 flex items-center justify-center">
-                    <button>Button</button>
-                    <button>Button</button>
+                    <button>Login</button>
+                    <button>Sign Up</button>
                 </div>
                 <div className="space-x-1">
-                    <div className="relative">
+                    <div className="relative text-left z-10 text-gray-600 hover:text-gray-900 cursor-pointer -mr-44 w-8 h-8 rounded-full flex items-center justify-center">
                         <button onClick={user ? () => setIsOpen(!isOpen) : () => setIsOpen(false)} className="text-gray-600 hover:text-gray-900">
-                            <img className='h-8 w-8 rounded-full' src="/user.jpg" alt="user" />
+                            <img className='h-8 w-8 rounded-full' src={`/user.jpg`} alt="user" />
                         </button>
                         {isOpen && (
                             <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-20 bg-white ring-1 ring-black ring-opacity-5">
@@ -37,6 +38,10 @@ const Header = () => {
                             </div>
                         )}
                     </div>
+                </div>
+                <div className="basket relative">
+                    <SlBasket size={24} />
+                    <span className='text-xs text-red-500 ml-1 font-bold rounded-full px-1 w-5 flex items-center justify-center py-0.5 bg-red-100 absolute -top-3 -right-3'>1</span>
                 </div>
             </div>
 
