@@ -2,7 +2,7 @@ import { FaFacebook, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-200 text-black px-8 py-12">
+        <footer className="bg-gray-100 text-black px-8 py-12">
             <div className="max-w-screen-xl mx-auto grid grid-cols-3 gap-8">
                 <div>
                     <h6 className="font-bold mb-2">Logo</h6>
@@ -46,7 +46,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div>
-                    <p>© 2023 Reuime. All rights reserved.</p>
+                    <p>© 2024 NIMA. All rights reserved.</p>
                     <div className="flex space-x-4">
                         <a href="#">Privacy Policy</a>
                         <a href="#">Terms of Service</a>

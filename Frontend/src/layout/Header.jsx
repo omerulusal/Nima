@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../components/Search/Search';
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     // eslint-disable-next-line no-unused-vars
     const [user, setUser] = useState(false)
+    const navigate = useNavigate();
 
     return (
         <nav className="flex items-center justify-between p-6 bg-white shadow">
             <div className="flex items-center space-x-16">
-                <div className=''>
+                <div className='cursor-pointer' onClick={() => navigate("/")}>
                     <img className='h-7' src="/logo.png" alt="logo" />
                 </div>
                 <Search />
