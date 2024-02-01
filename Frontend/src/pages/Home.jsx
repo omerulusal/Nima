@@ -17,9 +17,10 @@ const Home = () => {
         slidesToScroll: 1
     };
     const slideData = [
-        "/sale1.jpeg",
-        "/sale2.jpeg",
-        "/sale3.jpeg",
+        "https://m.media-amazon.com/images/S/aplus-media-library-service-media/34628741-0def-4bd5-9193-0bd7a80c8f06.__CR0,0,1464,600_PT0_SX1464_V1___.jpg",
+        "https://www.mystic-runner.com/wp-content/uploads/2023/08/adidas-banner.jpg",
+        "https://www.mystic-runner.com/wp-content/uploads/2023/08/nike-banner.jpg",
+        "https://m.media-amazon.com/images/S/aplus-media/sota/d3497fb2-7789-478b-8ebd-70022c2b7d10.__CR0,0,970,300_PT0_SX970_V1___.jpg"
     ]
     return (
         <div className="overflow-x-clip mt-5 drop-shadow-md mb-28">
@@ -41,6 +42,7 @@ const Home = () => {
                 <Title text={"En Çok Satılanlar"} />
                 <Button right text={"Detaylar"} onClick={() => navigate("/product/:id")} />
             </div>
+            <p className="text-sm text-gray-500 -mt-8 mb-14 ml-5 mr-5 text-justify w-3/4 md:w-1/2" >Lorem ipsum dolor sit amet </p>
             <BestSelling />
             <Cta />
         </div>

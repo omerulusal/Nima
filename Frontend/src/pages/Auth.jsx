@@ -20,7 +20,7 @@ const Auth = () => {
                         {sign && <input placeholder="Confirm Password" className="bg-gray-100 text-gray-900 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="password" />}
 
                         <p className="text-gray-900 mt-4"> {sign ? "Already have an account? " : "Create a new account "}
-                            <a className="text-sm text-blue-500 -200 hover:underline mt-4" onClick={() => setSign(!sign)} href="#">{sign ? "Login" : "Sign Up"}</a>
+                            <a className="text-sm text-blue-500 -200 hover:underline mt-4 cursor-pointer" onClick={() => setSign(!sign)} >{sign ? "Login" : "Sign Up"}</a>
                         </p>
                         <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150" type="submit">{sign ? "Sign Up" : "Login"}</button>
                     </form>

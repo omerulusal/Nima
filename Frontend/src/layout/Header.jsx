@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Search from '../components/Search/Search';
 import { useNavigate } from 'react-router-dom';
-import { SlBasket } from "react-icons/sl";
+import { SlBasket, SlLocationPin } from "react-icons/sl";
 
 
 const Header = () => {
@@ -19,8 +19,11 @@ const Header = () => {
                 </div>
                 <Search />
                 <div className="space-x-2 flex items-center justify-center">
-                    <button>Login</button>
-                    <button>Sign Up</button>
+                    <div className="flex items-center justify-center mr-5">
+                        <SlLocationPin color='orange' />
+                        <p className='ml-1 text-sm text-gray-600 hover:text-gray-900 cursor-pointer text-left z-10'>Turkey</p>
+                    </div>
+                    <button onClick={() => navigate("/auth")} >Login</button>
                 </div>
                 <div className="space-x-1">
                     <div className="relative text-left z-10 text-gray-600 hover:text-gray-900 cursor-pointer -mr-44 w-8 h-8 rounded-full flex items-center justify-center">
