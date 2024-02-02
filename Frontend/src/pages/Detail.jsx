@@ -45,7 +45,7 @@ const Detail = () => {
                             <option>40</option>
                             <option>41</option>
                             <option>42</option>
-                            <option>43</option>
+                            <option disabled>43</option>
                             <option>44</option>
                         </select>
                     </div>

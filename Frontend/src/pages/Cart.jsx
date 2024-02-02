@@ -1,7 +1,33 @@
+import Button from '../components/Button';
+
 const Cart = () => {
     return (
-        <div>Cart</div>
+        <div className="my-3 md:my-10">
+            <div className="flex items-center border-b py-3 mb-5 text-center">
+                <div className="w-1/5">Urun Resmi</div>
+                <div className="w-1/5" >Urun Adı</div>
+                <div className="w-1/5" >Urun Miktarı</div>
+                <div className="w-1/5" >Urun Fiyatı</div>
+                <div className="w-1/5" >Duzenle</div>
+            </div>
+            <div>
+                <div className="flex items-center text-center ">
+                    <div className="w-1/5 flex items-center justify-center my-2">Resim</div>
+                    <div className="w-1/5" >test</div>
+                    <div className="w-1/5 flex items-center justify-center" >
+                        100
+                    </div>
+                    <div className="w-1/5 text-lg  font-bold" >31</div>
+                    <div className="w-1/5">
+                        <Button text="Urunu Sil" full />
+                    </div>
+                </div>
+            </div>
+            <div className="flex items-center justify-between my-5 py-5 border-t">
+                <button className="w-1/5 underline text-sm">Sepeti Sil</button>
+                <div className="text-lg md:text-2xl font-bold">311TL</div>
+            </div>
+        </div>
     )
 }
-
 export default Cart
