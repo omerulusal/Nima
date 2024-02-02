@@ -1,9 +1,12 @@
-import TopluCard from "../components/TopluCard"
+import ProductCard from "../components/ProductCard"
+
 
 const Products = () => {
     return (
         <div className="w-full h-full flex justify-center items-center mt-10 mb-24 gap-5">
-            <TopluCard />
+            <div className="flex flex-row flex-wrap gap-2 justify-center items-center mx-5 mb-32">
+                <ProductCard />
+            </div>
         </div>
     )
 }

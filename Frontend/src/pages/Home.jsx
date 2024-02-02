@@ -2,9 +2,9 @@ import Slider from "react-slick";
 import Title from "../components/Title";
 import Button from "../components/Button";
 import { useNavigate } from 'react-router-dom';
-import TopluCard from "../components/TopluCard";
 import BestSelling from "../components/BestSelling";
 import Cta from "../components/CTA";
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
 
@@ -23,7 +23,7 @@ const Home = () => {
         "https://m.media-amazon.com/images/S/aplus-media/sota/d3497fb2-7789-478b-8ebd-70022c2b7d10.__CR0,0,970,300_PT0_SX970_V1___.jpg"
     ]
     return (
-        <div className="overflow-x-clip mt-5 drop-shadow-md mb-28">
+        <div className="overflow-x-clip mt-5 drop-shadow-sm mb-28">
             <Slider {...ayarlar}>
                 {slideData.map((item, id) => (
                     <div key={id}>
@@ -36,8 +36,9 @@ const Home = () => {
                 <Button right text={"Hepsini Gör"} onClick={() => navigate("/products")} />
             </div>
             <p className="text-sm text-gray-500 -mt-8 mb-14 ml-5 mr-5 text-justify w-3/4 md:w-1/2" >Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-            <TopluCard ikili />
-
+            <div className="flex flex-row flex-wrap gap-2 justify-center items-center mx-5 mb-32">
+                <ProductCard />
+            </div>
             <div className="flex flex-row justify-between mt-52">
                 <Title text={"En Çok Satılanlar"} />
                 <Button right text={"Detaylar"} onClick={() => navigate("/product/:id")} />
