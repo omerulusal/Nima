@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     urunlerArr: [],// tum urunleri bu dizide tutacagim
+    product: {},
     loading: false,
 }
 export const getProducts = createAsyncThunk(
@@ -21,6 +22,24 @@ export const getProducts = createAsyncThunk(
     }
 );
 
+export const getProductDetail = createAsyncThunk(
+    'product',
+    async (id) => {
+        try {
+            const response = await fetch(`http://localhost:4000/products/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP Hatası! Durum: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('HATA:', error);
+            throw error;
+        }
+    }
+);
+
+
 
 export const productSlice = createSlice({
     name: 'urun',
@@ -36,6 +55,13 @@ export const productSlice = createSlice({
             state.loading = false
             state.urunlerArr = action.payload
             // getProducts.fulfilled yani veri yukleme tamamlandıysa veriler urunlerArr ye yazılır
+        })
+        builder.addCase(getProductDetail.pending, (state, action) => {
+            state.loading = true
+        })
+        builder.addCase(getProductDetail.fulfilled, (state, action) => {
+            state.loading = false
+            state.product = action.payload
         })
     }
 })

@@ -41,7 +41,7 @@ const Home = () => {
             </div>
             <div className="flex flex-row justify-between mt-52">
                 <Title text={"En Çok Satılanlar"} />
-                <Button right text={"Detaylar"} onClick={() => navigate("/product/:id")} />
+                <Button right text={"Detaylar"} onClick={() => navigate("/products/:id")} />
             </div>
             <p className="text-sm text-gray-500 -mt-8 mb-14 ml-5 mr-5 text-justify w-3/4 md:w-1/2" >Lorem ipsum dolor sit amet </p>
             <BestSelling />
