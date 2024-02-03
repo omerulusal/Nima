@@ -9,14 +9,14 @@ const initialState = {
 
 export const register = createAsyncThunk(
     "register",
-    async () => {
+    async (gelenVeri) => {
         try {
             const requestOptions = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringfy(data)
+                body: JSON.stringfy(gelenVeri)
             };
             const response = await fetch("http://localhost:4000/register", requestOptions)
             if (!response.ok) {
@@ -34,14 +34,14 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
     "login",
-    async () => {
+    async (gelenVeri) => {
         try {
             const requestOptions = {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: data.email, password: data.password })
+                body: JSON.stringify({ email: gelenVeri.email, password: gelenVeri.password })
             }
             const response = await fetch("http://localhost:4000/login", requestOptions)
             if (!response.ok) {

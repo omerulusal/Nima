@@ -15,6 +15,9 @@ const Header = () => {
 
     const { carts } = useSelector(state => state.cart);
     //storedaki cart:cartSlice.js te bulunan carts stateini aldım
+
+
+    console.log(carts.length, "cartssssss")
     const dispatch = useDispatch();
 
 
@@ -57,7 +60,12 @@ const Header = () => {
                 </div>
                 <div className="basket relative cursor-pointer" onClick={() => navigate("/cart")} >
                     <SlBasket size={24} />
-                    <span className='text-xs text-red-500 ml-1 font-bold rounded-full px-1 w-5 flex items-center justify-center py-0.5 bg-red-100 absolute -top-3 -right-3'>1</span>
+                    {carts.length == 0 ? "" :
+                        <span className='text-xs text-red-500 ml-1 font-bold rounded-full px-1 w-5 flex items-center justify-center py-0.5 bg-red-100 absolute -top-3 -right-3'>
+                            {carts.length}
+                        </span>
+
+                    }
                 </div>
             </div>
 
