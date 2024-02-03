@@ -20,15 +20,19 @@ const Detail = () => {
 
 
     const [adet, setAdet] = useState(1)
-    if (adet < 0) {
-        setAdet(0)
+    if (adet < 1) {
+        setAdet(1)
     }
     if (adet > product?.product?.stock) {
         setAdet(adet - 1)
     }
+    if (adet > 5) {
+        alert("En fazla 5 adet sepete ekleyebilirsiniz")
+        setAdet(5)
+    }
 
 
-    const addBasket = () => {
+    const sepeteEkle = () => {
         const veri = {
             id: product?.product?._id,
             name: product?.product?.name,
@@ -102,7 +106,7 @@ const Detail = () => {
                         <span className="text-sm text-gray-500 font-bold mr-2 border p-2 rounded border-gray-300 bg-gray-100 ">{product?.product?.stock}</span>
                     </div>
                     <div className="mt-4 flex flex-col w-full">
-                        <Button text={"Add To Cart"} right full onClick={addBasket} />
+                        <Button text={"Add To Cart"} right full onClick={sepeteEkle} />
                         <Button text={"Buy Now"} right full onClick={() => { }} />
                     </div>
                 </div>

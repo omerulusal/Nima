@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom'
 
 const Auth = () => {
     const [sign, setSign] = useState(false)
+    const navigate = useNavigate()
     return (
         <div>
             <div className="flex flex-col items-center justify-center h-screen">
@@ -21,6 +23,7 @@ const Auth = () => {
 
                         <p className="text-gray-900 mt-4"> {sign ? "Already have an account? " : "Create a new account "}
                             <a className="text-sm text-blue-500 -200 hover:underline mt-4 cursor-pointer" onClick={() => setSign(!sign)} >{sign ? "Login" : "Sign Up"}</a>
+                            <div className='text-red-500 text-sm cursor-pointer my-4' onClick={() => navigate('/forgot')}>{sign ? "" : "Sifremi Unuttum"} </div>
                         </p>
                         <button className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150" type="submit">{sign ? "Sign Up" : "Login"}</button>
                     </form>

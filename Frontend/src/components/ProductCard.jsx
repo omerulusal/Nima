@@ -5,18 +5,22 @@ import { getProducts } from "../redux/productSlice"
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import textClip from "../utils/textClip";
+import { getAnahtar } from '../redux/generalSlice'
 
 
 const ProductCard = ({ bestSelling }) => {
-
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const { urunlerArr, loading } = useSelector(state => state.products)
+    const { anahtar } = useSelector(state => state.general)
     useEffect(() => {
-        dispatch(getProducts())
+        dispatch(getProducts(),
+            getAnahtar());//henuz kullanamadım
     }, [dispatch]);
 
     console.log(urunlerArr, loading, 'urunler!!!!')
+    console.log(anahtar, 'ANAHTARRRR')
+
     return (
         <div className="">
             {loading ? "Loading..." :
@@ -29,7 +33,6 @@ const ProductCard = ({ bestSelling }) => {
                                         <div className="cursor-pointer w-56 h-64 text-gray-800">
                                             <img src={product.images[0].public_id} alt="" />
                                         </div>
-
                                         <div className="bg-gray-50 w-56 p-2 flex mb-24 flex-col gap-1" >
                                             <span className="text-slate-400 font-bold text-xs">{product.category}</span>
                                             <span className="text-gray-800 font-bold text-xl">{product.name}</span>

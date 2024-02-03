@@ -1,5 +1,5 @@
 import "./search.css"
-const Search = () => {
+const Search = ({ setAnahtarKelime, anahtarKelime, anahtarFunc }) => {
     return (
         <div className="group">
             <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
@@ -9,7 +9,8 @@ const Search = () => {
                     ></path>
                 </g>
             </svg>
-            <input className="input" type="search" placeholder="Search" />
+            <input className="input" type="search" placeholder="Search" value={anahtarKelime} onChange={(e) => setAnahtarKelime(e.target.value)} />
+            <span className="text-gray-500 cursor-pointer hover:text-gray-700 hover:bg-gray-100 border border-gray-300 ml-2 right-1 rounded p-1 px-6 transition ease-in-out duration-150" onClick={anahtarFunc} >Ara</span>
         </div>
     )
 }

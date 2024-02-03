@@ -4,12 +4,25 @@ import { Link } from 'react-router-dom';
 import Search from '../components/Search/Search';
 import { useNavigate } from 'react-router-dom';
 import { SlBasket, SlLocationPin } from "react-icons/sl";
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getAnahtar } from '../redux/generalSlice'
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [anahtarKelime, setAnahtarKelime] = useState("");
     const [user, setUser] = useState(false)
     const navigate = useNavigate();
+
+    const { carts } = useSelector(state => state.cart);
+    //storedaki cart:cartSlice.js te bulunan carts stateini aldım
+    const dispatch = useDispatch();
+
+
+    const anahtarFunc = () => {
+        dispatch(getAnahtar(anahtarKelime))
+        setAnahtarKelime("")
+        navigate(`/products/${anahtarKelime}`)
+    }
 
     return (
         <nav className="flex items-center justify-between p-6 bg-white shadow">
@@ -17,7 +30,7 @@ const Header = () => {
                 <div className='cursor-pointer' onClick={() => navigate("/")}>
                     <img className='h-7' src="/logo.png" alt="logo" />
                 </div>
-                <Search />
+                <Search setAnahtarKelime={setAnahtarKelime} anahtarKelime={anahtarKelime} anahtarFunc={anahtarFunc} />
                 <div className="space-x-2 flex items-center justify-center">
                     <div className="flex items-center justify-center mr-5">
                         <SlLocationPin color='orange' />
