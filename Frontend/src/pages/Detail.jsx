@@ -37,6 +37,7 @@ const Detail = () => {
             id: product?.product?._id,
             name: product?.product?.name,
             price: product?.product?.price,
+            image:product?.product?.images[0].public_id,
             adet: adet
         }
         dispatch(addToCart(veri))

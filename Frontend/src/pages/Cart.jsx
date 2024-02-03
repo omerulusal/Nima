@@ -1,12 +1,19 @@
 import Button from '../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
+import { clearCart, removeFromCart } from '../redux/cartSlice';
 
 
 const Cart = () => {
 
     const { carts } = useSelector(state => state.cart);
     const dispatch = useDispatch()
-
+    
+    const deleteItem = (id) => {
+        dispatch(removeFromCart(id))
+    }
+    const allDelete = () => {
+        dispatch(clearCart())
+    }
     console.log(carts, 'cartlar')
 
     return (
@@ -18,21 +25,28 @@ const Cart = () => {
                 <div className="w-1/5" >Urun Fiyatı</div>
                 <div className="w-1/5" >Duzenle</div>
             </div>
-            <div>
-                <div className="flex items-center text-center ">
-                    <div className="w-1/5 flex items-center justify-center my-2">Resim</div>
-                    <div className="w-1/5" >{carts[1]?.name}</div>
-                    <div className="w-1/5 flex items-center justify-center" >
-                        {carts[1]?.adet}
-                    </div>
-                    <div className="w-1/5 text-lg  font-bold" >{carts[1]?.price}</div>
-                    <div className="w-1/5">
-                        <Button text="Urunu Sil" full />
+
+            {carts.map((cart, ix) => (
+                <div key={ix}>
+                    <div className="flex items-center text-center ">
+                        <div className="w-1/5 flex items-center justify-center my-2">
+                            <img className="w-20 h-auto" src={cart.image} />
+                        </div>
+                        <div className="w-1/5" >{cart.name}</div>
+                        <div className="w-1/5 flex items-center justify-center" >
+                            {cart.adet}
+                        </div>
+                        <div className="w-1/5 text-lg  font-bold" >{cart.price}</div>
+                        <div className="w-1/5">
+                            <Button text="Urunu Sil" full onClick={() => deleteItem(cart?.id)} />
+                        </div>
                     </div>
                 </div>
-            </div>
+            ))}
+
+
             <div className="flex items-center justify-between my-5 py-5 border-t">
-                <button className="w-1/5 underline text-sm">Sepeti Sil</button>
+                <button className="w-1/5 underline text-sm" onClick={() => allDelete()} >Sepeti Sil</button>
                 <div className="text-lg md:text-2xl font-bold">
                     Toplam {carts[1]?.price} TL
                 </div>
