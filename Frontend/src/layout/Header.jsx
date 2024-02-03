@@ -21,7 +21,7 @@ const Header = () => {
     const anahtarFunc = () => {
         dispatch(getAnahtar(anahtarKelime))
         setAnahtarKelime("")
-        navigate(`/products/${anahtarKelime}`)
+        navigate(`/products/`)
     }
 
     return (

@@ -21,11 +21,11 @@ const Cart = () => {
             <div>
                 <div className="flex items-center text-center ">
                     <div className="w-1/5 flex items-center justify-center my-2">Resim</div>
-                    <div className="w-1/5" >test</div>
+                    <div className="w-1/5" >{carts[1]?.name}</div>
                     <div className="w-1/5 flex items-center justify-center" >
-                        100
+                        {carts[1]?.adet}
                     </div>
-                    <div className="w-1/5 text-lg  font-bold" >31</div>
+                    <div className="w-1/5 text-lg  font-bold" >{carts[1]?.price}</div>
                     <div className="w-1/5">
                         <Button text="Urunu Sil" full />
                     </div>
@@ -33,7 +33,9 @@ const Cart = () => {
             </div>
             <div className="flex items-center justify-between my-5 py-5 border-t">
                 <button className="w-1/5 underline text-sm">Sepeti Sil</button>
-                <div className="text-lg md:text-2xl font-bold">311TL</div>
+                <div className="text-lg md:text-2xl font-bold">
+                    Toplam {carts[1]?.price} TL
+                </div>
             </div>
         </div>
     )
