@@ -1,34 +1,30 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { login, register } from "../redux/userSlice"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 const Auth = () => {
     const [sign, setSign] = useState(false)
-    const { user, isAuth } = useSelector(state => state.user)
+
     const [veri, setVeri] = useState({ name: "", email: "", password: "" })
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const loginFunc = () => {
         dispatch(login(veri))
-        console.log("login başarılı")
+        console.log("login alanı çalıştı")
     }
 
     const registerFunc = () => {
         dispatch(register(veri))
-        console.log("register başarılı")
+        console.log("register alanı çalıştı")
     }
 
     const handleChange = (e) => {
         setVeri({ ...veri, [e.target.name]: e.target.value })
     }
 
-    useEffect(() => {
-        if (isAuth) {
-            navigate("/")
-        }
-    }, [isAuth]);
+
 
 
     return (
