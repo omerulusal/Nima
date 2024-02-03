@@ -19,11 +19,29 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            state.carts.push(action.payload)
-            storeInLocalStorage(state.carts)
+            const isItemCart = state.carts.find(cart => cart.id == action.payload.id)
+            if (isItemCart) {
+                const tempCart = state.carts.map(item => {
+                    if (item.id == action.payload.id) {
+                        let tempQuantitiy = item.quantitiy + action.payload.quantitiy
+                        // bu işlem toplam urun sayısını verir.
+                        return {
+                            ...item, quantitiy: tempQuantitiy
+                        };
+                    } else {
+                        return item;
+                    }
+                })
+                state.carts = tempCart;
+                storeInLocalStorage(state.carts)
+            } else {
+                state.carts.push(action.payload)
+                storeInLocalStorage(state.carts)
+            }
         },
         removeFromCart: (state, action) => {
-            state.carts = state.carts.filter((item) => item.id !== action.payload)
+            const tempCart = state.carts.filter((item) => item.id != action.payload);
+            state.carts = tempCart
             storeInLocalStorage(state.carts)
         },
         clearCart: (state) => {
