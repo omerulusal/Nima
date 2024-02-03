@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productSlice from './productSlice'
+import userSlice from './userSlice'
+import generalSlice from './generalSlice'
 
 export default configureStore({
     reducer: {
-        products: productSlice
+        products: productSlice,
+        user: userSlice,
+        general: generalSlice
     },
 })
 
