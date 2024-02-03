@@ -1,6 +1,14 @@
 import Button from '../components/Button';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Cart = () => {
+
+    const { carts } = useSelector(state => state.cart);
+    const dispatch = useDispatch()
+
+    console.log(carts, 'cartlar')
+
     return (
         <div className="my-3 md:my-10">
             <div className="flex items-center border-b py-3 mb-5 text-center">
