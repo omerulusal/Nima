@@ -29,17 +29,17 @@ const ProductCard = ({ bestSelling }) => {
                         <div className="flex flex-row flex-wrap gap-2 justify-center items-center mx-5" >
                             {
                                 urunlerArr?.products?.map((product, id) => (
-                                    <div key={id} className="flex flex-col border w-56 max-h-[320px]" onClick={() => navigate(`/products/${product?._id}`)}>
+                                    <div key={id} className="flex flex-col border w-56 max-h-[250px]" onClick={() => navigate(`/products/${product?._id}`)}>
                                         <div className="cursor-pointer w-56 h-64 text-gray-800">
-                                            <img src={product.images[0].public_id} alt="" />
+                                            <img className="h-[90px] object-cover" src={product.images[0].public_id} alt="" />
                                         </div>
-                                        <div className="bg-gray-50 w-56 p-2 flex mb-24 flex-col gap-1" >
+                                        <div className="relative bg-gray-50 p-2 flex min-h-[170px] mb-96 flex-col justify-center gap-2" >
                                             <span className="text-slate-400 font-bold text-xs">{product.category}</span>
-                                            <span className="text-gray-800 font-bold text-xl">{product.name}</span>
+                                            <span className="text-gray-800 font-bold text-lg scroll-pb-1">{product.name}</span>
                                             {bestSelling ? <></> : <>
-                                                <p className="text-neutral-800">{textClip(`${product?.desc}`)}</p>
-                                                <div className="flex item-center justify-between mt-3">
-                                                    <h1 className="text-gray-700 font-bold text-xl">{product.price}TL</h1>
+                                                <p className="text-neutral-800 pb-5">{textClip(`${product?.desc}`)}</p>
+                                                <div className="flex flex-row absolute bottom-1 right-1 pt-5 item-center justify-between mt-1">
+                                                    <h1 className="text-gray-700 text-left w-24 font-bold text-xl">{product.price}TL</h1>
                                                     <button className="px-3 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded">Add to Basket</button>
                                                 </div>
                                             </>}

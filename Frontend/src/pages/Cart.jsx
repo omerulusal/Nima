@@ -7,7 +7,7 @@ const Cart = () => {
 
     const { carts } = useSelector(state => state.cart);
     const dispatch = useDispatch()
-    
+
     const deleteItem = (id) => {
         dispatch(removeFromCart(id))
     }
@@ -15,6 +15,9 @@ const Cart = () => {
         dispatch(clearCart())
     }
     console.log(carts, 'cartlar')
+
+
+    const cartTotal = carts.reduce((total, item) => total + item.price * item.adet, 0)
 
     return (
         <div className="my-3 md:my-10">
@@ -47,8 +50,9 @@ const Cart = () => {
 
             <div className="flex items-center justify-between my-5 py-5 border-t">
                 <button className="w-1/5 underline text-sm" onClick={() => allDelete()} >Sepeti Sil</button>
-                <div className="text-lg md:text-2xl font-bold">
-                    Toplam {carts[1]?.price} TL
+                <div className="text-lg md:text-2xl font-bold mr-10">Toplam Tutar:
+                    <br />
+                    {cartTotal}
                 </div>
             </div>
         </div>

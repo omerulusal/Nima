@@ -10,7 +10,7 @@ import { getAnahtar } from '../redux/generalSlice'
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [anahtarKelime, setAnahtarKelime] = useState("");
-    const [user, setUser] = useState(false)
+    const [user, setUser] = useState(true)
     const navigate = useNavigate();
 
     const { carts } = useSelector(state => state.cart);
@@ -47,7 +47,7 @@ const Header = () => {
                             <img className='h-8 w-8 rounded-full' src={`/user.jpg`} alt="user" />
                         </button>
                         {isOpen && (
-                            <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-20 bg-white ring-1 ring-black ring-opacity-5">
+                            <div className="absolute right-0 mt-40 w-48 rounded-md shadow-lg z-20 bg-white ring-1 ring-black ring-opacity-5">
                                 <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                     <Link to={"/"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Profile</Link>
                                     {user && <Link to={"/"} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Admin</Link>}
