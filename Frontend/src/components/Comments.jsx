@@ -1,12 +1,9 @@
-import { useDispatch, useSelector } from "react-redux"
-import { getProductDetail } from "../redux/productSlice"
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux"
+
 
 const Comments = () => {
-
     const { product, loading } = useSelector(state => state.products)
     console.log("Comment alanı", product?.product?.reviews?.[0].name)
-
     return (
         <div>
             {loading ? "Loading..." :
