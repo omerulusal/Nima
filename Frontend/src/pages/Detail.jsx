@@ -4,6 +4,7 @@ import { getProductDetail } from "../redux/productSlice"
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../redux/cartSlice'
+import Comments from "../components/Comments";
 
 
 const Detail = () => {
@@ -37,7 +38,7 @@ const Detail = () => {
             id: product?.product?._id,
             name: product?.product?.name,
             price: product?.product?.price,
-            image:product?.product?.images[0].public_id,
+            image: product?.product?.images[0].public_id,
             adet: adet
         }
         dispatch(addToCart(veri))
@@ -111,6 +112,9 @@ const Detail = () => {
                         <Button text={"Buy Now"} right full onClick={() => { }} />
                     </div>
                 </div>
+            </div>
+            <div className="w-full p-5 flex items-center">
+                <Comments />
             </div>
         </div>
     );
