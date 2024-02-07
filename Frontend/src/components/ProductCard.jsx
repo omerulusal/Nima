@@ -31,7 +31,7 @@ const ProductCard = ({ bestSelling }) => {
                                 urunlerArr?.products?.map((product, id) => (
                                     <div key={id} className="flex flex-col border w-56 max-h-[250px]" onClick={() => navigate(`/products/${product?._id}`)}>
                                         <div className="cursor-pointer w-56 h-64 text-gray-800">
-                                            <img className="h-[90px] object-cover" src={product.images[0].public_id} alt="" />
+                                            <img className="h-[90px] object-cover" src={product.images[0].public_id} alt="image" />
                                         </div>
                                         <div className="relative bg-gray-50 p-2 flex min-h-[170px] mb-96 flex-col justify-center gap-2" >
                                             <span className="text-slate-400 font-bold text-xs">{product.category}</span>

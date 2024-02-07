@@ -5,7 +5,9 @@ const Footer = () => {
         <footer className="bg-gray-100 text-black px-8 py-12">
             <div className="max-w-screen-xl mx-auto grid grid-cols-3 gap-8">
                 <div>
-                    <h6 className="font-bold mb-2">Logo</h6>
+                    <h6 className="font-bold mb-2">
+                        <img className='h-7' src="/logo.png" alt="logo" />
+                    </h6>
                     <p className="mb-2">Join our newsletter to stay up to date on features and releases.</p>
                     <form className="mb-4">
                         <input className="w-full px-4 py-2 rounded-md" type="email" placeholder="Enter your email" />

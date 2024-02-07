@@ -35,7 +35,9 @@ const Home = () => {
                 <Title text={"Tum Urunler"} />
                 <Button right text={"Hepsini Gör"} onClick={() => navigate("/products")} />
             </div>
-            <p className="text-sm text-gray-500 -mt-8 mb-14 ml-5 mr-5 text-justify w-3/4 md:w-1/2" >Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p className="text-sm text-gray-500 -mt-8 mb-14 ml-5 mr-5 text-justify w-3/4 md:w-1/2" >
+                Son Moda Uygun Fiyatlı Ayakkabılar
+            </p>
             <div className="flex flex-row flex-wrap gap-2 justify-center items-center mx-5 mb-32">
                 <ProductCard />
             </div>

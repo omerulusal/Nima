@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     if (password.length < 6) {
-        return res.status(404).json({
+        return res.status(404)  .json({
             message: "Sifre en az 6 karakter olmalıdır"
         })
     }
